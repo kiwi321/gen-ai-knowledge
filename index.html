@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>生成式模型知识体系 · 近 5 日收藏蒸馏</title>
+  <meta name="description" content="从 2026-09-01 至 09-05 的 X 收藏推出的知识体系：空间生成、视频生成、Agent 生产、接入。帖子是证据或一种方案，不是目录。" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231b1916'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='16' fill='%23c23b22' font-family='Georgia'%3EX%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,650;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: #f3eee4;
+      --paper-2: #ebe4d6;
+      --card: #fbf7f0;
+      --ink: #1b1916;
+      --muted: #6b645a;
+      --faint: #9a9286;
+      --rule: #d8cfc0;
+      --accent: #c23b22;
+      --accent-soft: #f3d3c8;
+      --teal: #1f5c4e;
+      --teal-soft: #d5e6df;
+      --gold: #8a5a12;
+      --gold-soft: #f0e2c4;
+      --prompt: #161412;
+      --prompt-fg: #e8dfd0;
+      --shadow: 0 1px 0 rgba(27, 25, 22, 0.06);
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(1200px 500px at 10% -10%, #efe4cf 0%, transparent 55%),
+        var(--paper);
+      color: var(--ink);
+      font-family: "IBM Plex Sans", "PingFang SC", "Noto Sans SC", sans-serif;
+      font-size: 16.5px;
+      line-height: 1.7;
+    }
+    a { color: var(--teal); text-underline-offset: 3px; }
+    a:hover { color: var(--accent); }
+    .wrap {
+      display: grid;
+      grid-template-columns: 232px minmax(0, 1fr);
+      max-width: 1180px;
+      margin: 0 auto;
+      min-height: 100vh;
+    }
+    nav.toc {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 28px 16px 28px 22px;
+      border-right: 1px solid var(--rule);
+      overflow: auto;
+    }
+    nav.toc .mark {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 650;
+      font-size: 15px;
+    }
+    nav.toc .mark span { color: var(--accent); }
+    nav.toc .tiny {
+      margin: 8px 0 18px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    nav.toc .group {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin: 16px 0 4px;
+    }
+    nav.toc a {
+      display: block;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 5px 0 5px 10px;
+      border-left: 2px solid transparent;
+    }
+    nav.toc a:hover, nav.toc a.active {
+      color: var(--ink);
+      border-left-color: var(--accent);
+    }
+    nav.toc a.sub { font-size: 12px; padding-left: 18px; }
+    main { padding: 36px 44px 88px; min-width: 0; }
+    h1 {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 650;
+      font-size: clamp(30px, 5vw, 50px);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      margin: 0 0 14px;
+      overflow-wrap: break-word;
+    }
+    h1 em { font-style: italic; font-weight: 500; color: var(--accent); }
+    .lede { max-width: 68ch; font-size: 18px; color: #3a3530; margin: 0 0 18px; }
+    .stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; }
+    .pill {
+      border: 1px solid var(--rule);
+      background: var(--card);
+      border-radius: 999px;
+      padding: 5px 11px;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+    .pill b { color: var(--ink); }
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      padding: 10px 0 12px;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+    }
+    .search {
+      flex: 1 1 220px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 8px 12px;
+    }
+    .search input {
+      border: 0; outline: 0; width: 100%;
+      background: transparent; font: inherit; font-size: 14.5px;
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip {
+      border: 1px solid var(--rule);
+      background: transparent;
+      border-radius: 999px;
+      padding: 6px 11px;
+      font: inherit;
+      font-size: 12.5px;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .chip[aria-pressed="true"] {
+      background: var(--ink);
+      color: #f6efe4;
+      border-color: var(--ink);
+    }
+    #hit { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+    .empty { display: none; margin: 20px 0; color: var(--muted); font-style: italic; }
+
+    .map {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 8px 0 28px;
+    }
+    .map a {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      padding: 14px 16px;
+    }
+    .map a:hover { border-color: var(--ink); }
+    .map .n {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 13px;
+      color: var(--accent);
+    }
+    .map h3 { margin: 2px 0 6px; font-size: 17px; }
+    .map p { margin: 0; color: var(--muted); font-size: 13.5px; }
+
+    .chapter { margin: 48px 0 8px; scroll-margin-top: 72px; }
+    .chapter > h2 {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 32px;
+      letter-spacing: -0.02em;
+      margin: 0 0 8px;
+    }
+    .ch-lead { color: var(--muted); max-width: 70ch; margin: 0 0 18px; }
+
+    .axiom {
+      background: var(--ink);
+      color: #f6efe4;
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin: 0 0 18px;
+    }
+    .axiom .k {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #d9a08e;
+      margin-bottom: 6px;
+    }
+    .axiom p { margin: 0; font-size: 17px; }
+
+    .unit {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 18px 18px 16px;
+      margin: 0 0 12px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+    .unit h3 {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 22px;
+      line-height: 1.3;
+      margin: 0 0 8px;
+    }
+    .unit h4 {
+      font-size: 15px;
+      margin: 14px 0 6px;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+    .tag {
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--paper-2);
+      color: var(--muted);
+    }
+    .tag.p { background: var(--accent-soft); color: #7a2416; }
+    .tag.m { background: var(--teal-soft); color: var(--teal); }
+    .tag.x { background: var(--gold-soft); color: var(--gold); }
+
+    ul.clean, ol.clean { margin: 0 0 8px; padding-left: 1.2em; }
+    ul.clean li, ol.clean li { margin: 5px 0; }
+    .cite { font-size: 12.5px; color: var(--muted); }
+    .cite a { color: inherit; }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 10px 0;
+    }
+    .opt {
+      border: 1px dashed var(--rule);
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: var(--paper);
+    }
+    .opt .who { font-size: 12px; color: var(--gold); margin-bottom: 4px; }
+    .opt h4 { margin: 0 0 6px; font-size: 15px; }
+    .opt p { margin: 0; font-size: 14.5px; }
+
+    .correct {
+      background: #f7ead6;
+      border: 1px solid #e4c48a;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin: 10px 0 0;
+    }
+    .correct strong { color: #5c4318; }
+    .correct p { margin: 6px 0 0; font-size: 14.5px; color: #5c4318; }
+    .correct p:first-child { margin-top: 0; }
+
+    .table-wrap { overflow-x: auto; max-width: 100%; }
+    table {
+      width: 100%;
+      min-width: 520px;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--rule);
+      vertical-align: top;
+    }
+    th { font-size: 12.5px; color: var(--muted); font-weight: 600; }
+
+    .prompt-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      scroll-margin-top: 88px;
+    }
+    pre {
+      background: var(--prompt);
+      color: var(--prompt-fg);
+      border-radius: 12px;
+      padding: 14px;
+      overflow: auto;
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 12.5px;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      margin: 8px 0 0;
+    }
+    button.copy {
+      border: 1px solid var(--rule);
+      background: var(--paper);
+      border-radius: 8px;
+      padding: 4px 9px;
+      font: inherit;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    button.copy.ok { background: var(--teal-soft); border-color: var(--teal); }
+
+    footer {
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 1px solid var(--rule);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .hidden { display: none !important; }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; }
+      nav.toc {
+        position: relative;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--rule);
+        padding: 16px 16px 10px;
+      }
+      nav.toc .links { display: flex; flex-wrap: wrap; gap: 2px 12px; }
+      nav.toc a { border-left: 0; padding-left: 0; white-space: nowrap; }
+      nav.toc .group, nav.toc a.sub { display: none; }
+      main { padding: 22px 16px 64px; }
+      .toolbar { position: relative; z-index: 1; border-bottom: 0; }
+      .map, .options { grid-template-columns: 1fr; }
+      h1 { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="toc" aria-label="体系目录">
+      <div class="mark">知识体系<span> · 蒸馏</span></div>
+      <p class="tiny">收藏是原料，不是目录。<br>2026-09-01 → 09-05</p>
+      <div class="links">
+        <a href="#how">怎么读</a>
+        <div class="group">体系</div>
+        <a href="#space">I 空间生成</a>
+        <a class="sub" href="#space-principles">原理</a>
+        <a class="sub" href="#space-choose">选型</a>
+        <a class="sub" href="#space-methods">方案</a>
+        <a class="sub" href="#space-fix">纠错</a>
+        <a href="#video">II 视频生成</a>
+        <a class="sub" href="#video-paths">两条路径</a>
+        <a class="sub" href="#video-methods">方案</a>
+        <a class="sub" href="#video-fix">纠错</a>
+        <a href="#agent">III Agent 生产</a>
+        <a class="sub" href="#agent-roles">编排与执行</a>
+        <a class="sub" href="#agent-pipeline">收敛管线</a>
+        <a class="sub" href="#agent-fix">纠错</a>
+        <a href="#access">IV 界面与接入</a>
+        <a class="sub" href="#access-ui">原型边界</a>
+        <a class="sub" href="#access-door">入口</a>
+      </div>
+    </nav>
+
+    <main>
+      <header>
+        <h1>不是收藏目录。<em>是能把那些帖子推出来的结构。</em></h1>
+        <p class="lede">近五天的 X 收藏里，模型与生成相关的说法高度重复、也高度夸张。下面四套体系回答的是：它们为什么会同时出现、各自在解决哪一类问题、哪些是可复用方法、哪些只是 demo 话术。帖子降为证据或一种方案；说错的直接改掉。</p>
+        <div class="stats">
+          <span class="pill">原料 <b>71</b> 条收藏 · 筛掉支付 / 跨境 / 成人</span>
+          <span class="pill">4 套体系</span>
+          <span class="pill">窗口 2026-09-01 → 09-05</span>
+        </div>
+      </header>
+
+      <div class="toolbar">
+        <label class="search">
+          <span aria-hidden="true">⌕</span>
+          <input id="q" type="search" placeholder="在体系里搜：闭环、额度、H3、MCP…" autocomplete="off" />
+        </label>
+        <div class="chips" id="chips" role="group" aria-label="体系">
+          <button class="chip" data-sys="all" aria-pressed="true">全部</button>
+          <button class="chip" data-sys="space">空间</button>
+          <button class="chip" data-sys="video">视频</button>
+          <button class="chip" data-sys="agent">Agent</button>
+          <button class="chip" data-sys="access">接入</button>
+        </div>
+        <span id="hit"></span>
+      </div>
+      <p class="empty" id="empty">没有命中。试试「闭环」「额度」「可编辑」「AI Studio」。</p>
+
+      <section class="chapter" id="how" data-sys="all">
+        <h2>怎么读这四套</h2>
+        <p class="ch-lead">它们不是四个互斥专题，是同一波模型能力在不同交付物上的切面。</p>
+        <div class="map">
+          <a href="#space">
+            <div class="n">体系 I</div>
+            <h3>空间生成</h3>
+            <p>终点是可编辑的场景图：网格、关卡、可玩原型。视频模型假装 3D，解决不了「还能改」。</p>
+          </a>
+          <a href="#video">
+            <div class="n">体系 II</div>
+            <h3>视频生成</h3>
+            <p>终点是一段像素。要空间连续，先有几何；要日常感，先锁摄影机语言。两者不要混用同一套提示词。</p>
+          </a>
+          <a href="#agent">
+            <div class="n">体系 III</div>
+            <h3>Agent 生产</h3>
+            <p>谁判断、谁搬砖、什么叫做完。短剧 skill、额度条、过夜 Manager Loop，都是这套约束的实例。</p>
+          </a>
+          <a href="#access">
+            <div class="n">体系 IV</div>
+            <h3>界面与接入</h3>
+            <p>同一模型，入口不同能力不同。原型可以一句话出页；工程化从这里开始才算。</p>
+          </a>
+        </div>
+        <article class="unit" data-keys="读法 证据 方案 纠错 demo">
+          <div class="tags"><span class="tag p">约定</span></div>
+          <h3>三条阅读规则</h3>
+          <ol class="clean">
+            <li><b>原则在前，帖子在后。</b>能从原则推出帖子里的做法，这页才算做成了；做不到就说明还在摘抄。</li>
+            <li><b>方法默认是一种方案。</b>Anshu 的 image gen 闭环、汤光头的 H3 提示词、宝玉的 Fable 指挥句，都是社区跑通的路径，不是标准答案。</li>
+            <li><b>病毒 demo 只证明上界存在，不证明均值。</b>过夜建曼哈顿、11 分钟钢琴、45 分钟「游戏」，用来标定能力边界；拿去当工期或报价会错。</li>
+          </ol>
+        </article>
+      </section>
+
+      <!-- ===================== SPACE ===================== -->
+      <section class="chapter" id="space" data-sys="space">
+        <h2>I · 空间生成</h2>
+        <p class="ch-lead">GPT-6 Astra 这一周刷屏的真正对象，不是「更漂亮的 3D 图」，是把一句描述变成还能继续工作的空间。</p>
+        <div class="axiom">
+          <div class="k">核心命题</div>
+          <p>空间生成的验收标准是可编辑性：网格、材质、关卡逻辑、浏览器工程，而不是最终那一帧。视频模型可以伪造一次浏览，给不了第二次修改。</p>
+        </div>
+
+        <article class="unit" id="space-principles" data-sys="space" data-keys="computer use blender unreal 可编辑 工程 mcp 屏幕 视觉闭环 风格靶">
+          <div class="tags"><span class="tag p">原理</span></div>
+          <h3>四条机制，够推出这一周几乎所有 3D demo</h3>
+          <h4>1. 交付物分层</h4>
+          <p>从易到难：单张概念图 → 可渲染网格 → 可交互场景 → 可过夜生长的世界。每一层多一个约束：拓扑、碰撞、时间。帖子里「重建艺术宫」「蒸汽火车 3295 个对象」「浏览器卡丁车」「一周曼哈顿」看起来五花八门，其实只是停在这一条链的不同位置。</p>
+          <h4>2. 没有风格靶，模型会在「还行」处停住</h4>
+          <p>纯文本描述对美术方向是欠定的。要画质，先用图像生成做出<b>目标截图</b>，再让模型用视觉对比游戏内画面去逼近。这不是提示词写得更长，是给优化过程一个可比较的损失。Anshu 说的 “the trick is image gen”，是这条机制的一种实现，不是魔法。</p>
+          <h4>3. 屏幕是未做 API 的软件的接口</h4>
+          <p>Blender、Unreal、KiCad、Canva 学习成本高、功能完整、AI 接口落后。Agent 不必等官方插件：把 GUI 当工具面，computer use 就能进这些软件。以前的路线是先包 MCP / API 再教模型用；现在多了一条「先会用软件，再谈封装」。</p>
+          <h4>4. 世界尺度是长程问题</h4>
+          <p>一条 prompt 能做的是局部场景。街道级、城市级、多 agent 共生，需要 Manager Loop / <code>/goal</code> 这种按天计的循环：巡检、修补、再巡检。5 天还没做完的 SimCity clone，说明的是任务形态变了，不是「一句话出 3A」。</p>
+          <p class="cite">可由 <a href="https://x.com/willlhhh/status/2096125043298517425">@willlhhh</a> 的判断、 <a href="https://x.com/anshuc/status/2096008083826725132">@anshuc</a> 的画质闭环、以及 Unreal / Blender 过夜 demo 反推。</p>
+        </article>
+
+        <article class="unit" id="space-choose" data-sys="space" data-keys="threejs blender unreal 选型 网页游戏 可编辑 cycles">
+          <div class="tags"><span class="tag p">选型</span></div>
+          <h3>先选载体，再谈模型</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>你要的东西</th><th>载体</th><th>为什么</th><th>不要指望</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>能转发的可玩小东西</td>
+                  <td>浏览器 + three.js / WebGL</td>
+                  <td>零安装、好传播、和 Codex/Sites 同一运行时</td>
+                  <td>写实、复杂物理、大型世界。风格应主动走动森 / 塞尔达 / voxel，避开 three.js 的写实短板。</td>
+                </tr>
+                <tr>
+                  <td>还能改的资产</td>
+                  <td>Blender（MCP 或 computer use）</td>
+                  <td>对象是 mesh、材质、相机，后续可进任何管线</td>
+                  <td>一次出片就结束。价值在工程文件还在。</td>
+                </tr>
+                <tr>
+                  <td>开世界 / 引擎级</td>
+                  <td>Unreal + 长程循环</td>
+                  <td>按街道、按关卡迭代，适合过夜</td>
+                  <td>当天交稿。病毒视频里的「一周」是真实量级。</td>
+                </tr>
+                <tr>
+                  <td>只看一次的浏览感</td>
+                  <td>视频模型（体系 II）</td>
+                  <td>像素成本低</td>
+                  <td>改一扇门、换一条路线。没有场景图。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>模型对照只在<b>同一载体</b>上有意义。Astra 在 Blender 场景上相对 Sol 是明显一跳，Kimi K3 用更低成本贴近；Fable 5.1 在单次 3D 对打里被说成肉眼落后——但那是同一天、同一提示、同一次运行，只能当弱证据。</p>
+        </article>
+
+        <article class="unit" id="space-methods" data-sys="space" data-keys="image gen 闭环 60fps mcp 概念图 陶陶 threejs 扫描 zillow apple park">
+          <div class="tags"><span class="tag m">方案</span></div>
+          <h3>四种社区已跑通的做法</h3>
+          <div class="options">
+            <div class="opt">
+              <div class="who">方案 A · 画质优先</div>
+              <h4>图像生成当损失，Blender 当优化器</h4>
+              <p>Codex 接 Blender MCP → 用 image gen 出目标画风概念图 → 迭代直到<b>游戏内截图</b>接近概念图，并钉死 60fps → 推理 High。贴图也由 image gen 喂给 mesh，不引入外部资产。适合「看起来要像作品」的小场景。45 分钟那次是画面 demo，不是完整玩法。</p>
+            </div>
+            <div class="opt">
+              <div class="who">方案 B · 传播优先</div>
+              <h4>一句话网页 3D，风格服从框架</h4>
+              <p>明确：网页、three.js、Vite、可旋转缩放、角色与道具要可扩展。主动指定圆角 / 像素 / 二次元，把引擎短板写成风格。适合玩具、展示、验证空间想法。nocoo 的儿童空间是这个模板。</p>
+            </div>
+            <div class="opt">
+              <div class="who">方案 C · 有参考物</div>
+              <h4>照片、扫描、图纸 → 可编辑几何</h4>
+              <p>输入可以是建筑照片、房产图、老图纸、室内扫描。约束写成：不下载现成资产、材质从参考里长出来、对象可拆可改。适合重建、展示、地产、档案。Zillow / Apple Park / 蒸汽火车 / 客厅扫描都是同一方法的输入替换。</p>
+            </div>
+            <div class="opt">
+              <div class="who">方案 D · 世界尺度</div>
+              <h4>长程循环，按区块验收</h4>
+              <p>把世界切成可检查的单位（一条街、一个房间、一个系统），让 Agent 过夜巡检。验收不是「看起来酷」，是下一块还能接上。适合开世界和多 agent 场景；工期按天，不是按分钟。</p>
+            </div>
+          </div>
+          <div class="prompt-head"><span>方案 A 的操作说明（社区方案）</span><button type="button" class="copy" data-copy="p-loop">复制</button></div>
+          <pre id="p-loop">Connect Codex to Blender MCP.
+1) Generate concept images of the target art style with image gen.
+2) Model every asset in Blender. Use image gen for mesh textures. No external assets.
+3) Iterate until in-game screenshots match the concept images as closely as possible, running at 60fps.
+4) High reasoning.
+Art direction example: sad but beautiful dystopian theme, voxel-ish, lighting that feels real and physical.</pre>
+          <div class="prompt-head"><span>方案 B 的结构模板（社区方案）</span><button type="button" class="copy" data-copy="p-web3d">复制</button></div>
+          <pre id="p-web3d">新项目，网页3D，threejs。
+角色：____（身份、年龄、外观，动作要可区分）。
+空间：____（面积、焦点、分区；哪些可扩展成独立模型）。
+风格：主动规避 three.js 写实短板，采用圆角 / 像素化 / 二次元（或动森、塞尔达）。
+相机：支持缩放旋转。构建：Vite，本地可跑、可热刷新。
+验收：不是一张图，是可继续加道具和动作的工程。</pre>
+        </article>
+
+        <article class="unit" id="space-fix" data-sys="space" data-keys="纠错 失业 世界级 blender 完整游戏 配额 kiCad canva demo 上界">
+          <div class="tags"><span class="tag x">纠错</span></div>
+          <h3>不要从这一周的帖子推出这些</h3>
+          <div class="correct">
+            <p><strong>「Astra 是世界级 Blender 选手」</strong> → 更准确：它的优势是三维推理 + 会用软件。网格质量和资深 TD 比，demo 选择偏差极大；有人直接指出那不是 world-class Blender。</p>
+            <p><strong>「45 分钟做出 3D 游戏」</strong> → 作者后来澄清：要的是画面 demo，玩法还在跑；three.js、无外部依赖。完整游戏仍是长程任务。</p>
+            <p><strong>「前端 / 游戏行业要完了」</strong> → computer use 降低的是<b>从零到可玩原型</b>的门槛。物理、网络同步、工具链、性能、内容管线没有消失。KiCad 排 PCB、Canva 画像，证明的是「能进专业 GUI」，不是「能替代专业流程」。</p>
+            <p><strong>「Fable 已经不能看 / Astra 全面碾压」</strong> → 单次对打，且有人报告 Fable 当天懒、重试仍怪。Kimi K3 在成本和速度上是真实竞争者。把病毒视频当排行榜会错。</p>
+            <p><strong>配额「几乎没掉」</strong> → 绑定 20x Pro、只跑了画面 demo、作者自己也怀疑是不是碰上重置。不能当成本模型用。</p>
+          </div>
+        </article>
+      </section>
+
+      <!-- ===================== VIDEO ===================== -->
+      <section class="chapter" id="video" data-sys="video">
+        <h2>II · 视频生成</h2>
+        <p class="ch-lead">视频模型擅长补一段连续像素，不持有可查询的空间。所以「一镜穿过七个房间」和「海边随手拍」是两类问题。</p>
+        <div class="axiom">
+          <div class="k">核心命题</div>
+          <p>要空间连续，先建几何再渲染像素；要日常真实感，先锁摄影机缺陷和身份，而不是上更贵的模型。路径选错，提示词再长也补不回场景图。</p>
+        </div>
+
+        <article class="unit" id="video-paths" data-sys="video" data-keys="空间连续 日常感 seedance h3 可编辑 成本 即梦 blender">
+          <div class="tags"><span class="tag p">原理</span></div>
+          <h3>两条路径，不要共用工作流</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th></th><th>路径 α · 空间连续</th><th>路径 β · 日常手持</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>要骗过的是</td>
+                  <td>房间关系、相机是否穿模、物体是否还在</td>
+                  <td>这是不是朋友随手拍的：对焦、抖动、曝光、无配乐</td>
+                </tr>
+                <tr>
+                  <td>真正的约束</td>
+                  <td>先有统一三维空间和同一套视角</td>
+                  <td>身份锁死 + 摄影机语言 + 按秒的事件表</td>
+                </tr>
+                <tr>
+                  <td>模型角色</td>
+                  <td>视频模型只负责填像素，不负责发明建筑</td>
+                  <td>便宜的视频模型通常够用；贵模型买的是纹理不是「更像监控」</td>
+                </tr>
+                <tr>
+                  <td>改一处的代价</td>
+                  <td>改场景图，再导出，再生成 —— 这就是 Blender 路线的意义</td>
+                  <td>改提示词里的某一秒，整段重抽</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>歸藏拿 GPT-6 驱 Blender 的甜甜圈动画去对 Seedance 2.5：可以比观感，但更该比的是<b>下一次修改谁便宜</b>。即梦一条大约 ¥35（384 积分），Codex 套餐口径估 Astra 大约 ¥8——这是个人账单观察，用来建立数量级，不是报价单。H3 有渠道在推约 0.1 元/秒，评论里也有「比 SD 仍差一截」；它适合路径 β，不自动胜任路径 α。</p>
+        </article>
+
+        <article class="unit" id="video-methods" data-sys="video" data-keys="分镜 故事板 七个房间 提示词 锁身份 手持 chatcut 剪映 grok bot">
+          <div class="tags"><span class="tag m">方案</span></div>
+          <h3>三种做法，对应三种成品</h3>
+          <div class="options">
+            <div class="opt">
+              <div class="who">方案 α · 一镜多空间</div>
+              <h4>几何先行，视频后填</h4>
+              <p>故事 → 只定动作 / 区域 / 行进 → 搭本集统一三维空间 → 摆人、道具、相机，走完整条路线 → 关键位置导出<b>同一视角体系</b>的截图 → 故事板 → Seedance（或同类）。可抄的一句：先锁定空间路径，模型只填画面细节。</p>
+            </div>
+            <div class="opt">
+              <div class="who">方案 β · 日常感短片</div>
+              <h4>把「不像广告」写成约束</h4>
+              <p>不必上最贵视频模型。提示词按五锁来写：身份、场景（无品牌无地标）、摄影机缺陷、按秒事件、环境声。禁止云台、无人机、慢动作、配乐、字幕。H3 + 长提示词是这一方案的一种实现。</p>
+            </div>
+            <div class="opt">
+              <div class="who">方案 γ · 已有素材</div>
+              <h4>Agent 剪时间线，不替你拍</h4>
+              <p>素材齐了再用 Codex + ChatCut 这类组合口喷剪。它替代的是剪映操作，不是摄影。Grok bot 则是另一条「图或一句话 → 情绪短片」的入口，适合没有成片管线时的试水。</p>
+            </div>
+            <div class="opt">
+              <div class="who">接到短剧时</div>
+              <h4>分镜层才准碰视频模型</h4>
+              <p>大纲、人设、美术、剧本先收敛（体系 III）。分镜按 2–5 秒切，提示词跟选定的视频模型对账。提前让视频模型「自己想剧」，人物和房间会每张都不一样。</p>
+            </div>
+          </div>
+          <div class="prompt-head"><span>方案 β 的提示词骨架（社区方案，可替换人物与事件）</span><button type="button" class="copy" data-copy="p-h3">复制</button></div>
+          <pre id="p-h3">Create a 30-second, 1080p ultra-realistic home video of the same person doing one unplanned ordinary activity.
+
+LOCK identity: face, hair, outfit, bag, accessories — unchanged throughout.
+LOCK setting: real residential streets, no brands, landmarks, ads, or staged crowds.
+LOCK camera: older handheld consumer camera. Imperfect framing, shake, autofocus hunting, exposure shifts, motion blur, digital noise, compression. No gimbal, drone, slow motion, commercial polish.
+LOCK time: write the 30 seconds in 5-second beats, one concrete action each.
+LOCK audio: wind, footsteps, ambience, genuine laughter. No music, narration, subtitles, logos, watermarks.
+
+Realism: physics, hair, fabric, hands, faces. No distortions, duplicated objects, disappearing props, wardrobe changes, anatomy errors.
+Final feel: accidentally captured by a friend — intimate, imperfect, spontaneous.</pre>
+        </article>
+
+        <article class="unit" id="video-fix" data-sys="video" data-keys="纠错 0.1元 可比性 h3 sd 视频模型 3d">
+          <div class="tags"><span class="tag x">纠错</span></div>
+          <h3>价格和「谁更强」都容易读错</h3>
+          <div class="correct">
+            <p><strong>「H3 全面拥抱，不输 SD」</strong> → 观感接近的是路径 β 的日常片。路径 α 的空间一致性、以及部分人评的「仍差约 20%」，说明 H3 是成本方案，不是上限方案。0.1 元/秒是具体渠道价，换平台会变。</p>
+            <p><strong>「Blender 动画 vs Seedance 没有可比性」</strong> → 比最终 6 秒片子，确实类别不同。比「改第 3 秒的相机」就完全可比：一边改工程再渲染，一边整段重抽。歸藏后来说这代表一种新可能，这个读法是对的。</p>
+            <p><strong>视频模型不会「变成游戏引擎」</strong> → 游戏行业被短视频化，说的是内容分发；生产侧只要还要改关卡，就仍要场景图（回到体系 I）。</p>
+          </div>
+        </article>
+      </section>
+
+      <!-- ===================== AGENT ===================== -->
+      <section class="chapter" id="agent" data-sys="agent">
+        <h2>III · Agent 生产</h2>
+        <p class="ch-lead">模型越贵，越不该去读一千个文件。短剧 skill、Fable 进度条、过夜建城，用的是同一套生产约束。</p>
+        <div class="axiom">
+          <div class="k">核心命题</div>
+          <p>智力花在澄清、拆解、验收；执行、检索、改文件、出图交给更便宜的工人。清单如果只写给模型看，等于没有清单——质量门必须是脚本。</p>
+        </div>
+
+        <article class="unit" id="agent-roles" data-sys="agent" data-keys="fable opus sonnet 额度 subagent max /clear /compact 编排">
+          <div class="tags"><span class="tag p">原理</span></div>
+          <h3>把「模型」拆成两个角色</h3>
+          <p>在有分级额度的编码 Agent 里（这一周是 Fable 大约占周额度一半、更贵也更聪明），失败模式只有两种：</p>
+          <ul class="clean">
+            <li><b>智力见底：</b>指挥模型烧得太快，后半周只能降智。</li>
+            <li><b>窗口浪费：</b>便宜模型把总进度条先打满，最强模型反而没用完。</li>
+          </ul>
+          <p>所以不是「永远用最强」，是让两条消耗大致同比例下降。做法是角色分离：</p>
+          <ul class="clean">
+            <li>指挥：需求澄清、方案、任务分发、抽查结果。强度 High 或 Medium，<b>默认不上 Max</b>——Max 买的是更长的死磕，不是更正确的架构判断，却按最高倍率烧指挥额度。</li>
+            <li>工人：读大量代码、写、测、批量改。Opus / Sonnet 或同等执行模型。</li>
+            <li>卫生：换任务 <code>/clear</code>；长任务中途 <code>/compact</code>；每天看两次进度条，哪条超前就反向调。</li>
+          </ul>
+          <p>过夜 Manager Loop、五天 <code>/goal</code>，是同一原则在空间生成上的加长版：指挥者不进引擎抠面，只规定区块和验收。</p>
+          <div class="prompt-head"><span>指挥角色的固定附言（社区方案）</span><button type="button" class="copy" data-copy="p-fable">复制</button></div>
+          <pre id="p-fable">注意你的主要任务是分析、编排和验证，具体任务尽可能交给 subagent 去执行。自己只做需求澄清、方案拆解、任务分发和结果验收。实现类工作（读大量代码、写代码、跑测试、批量修改）一律派给 subagent。不要选 Max 及以上。</pre>
+        </article>
+
+        <article class="unit" id="agent-pipeline" data-sys="agent" data-keys="shuohao 短剧 质量门 收敛 大纲 分镜 小说 outline">
+          <div class="tags"><span class="tag m">实例</span></div>
+          <h3>收敛式管线：短剧只是写得最清楚的一个例子</h3>
+          <p>任何多步骤生成（短剧、系列视频、大场景）都有同一个结构问题：后面的步骤爱做新决定，于是人物、房间、剧情每张都不一样。收敛规则是：</p>
+          <ol class="clean">
+            <li><b>先锁结构，再锁人与世界，最后才输出。</b>大纲可以否定后面的一切；分镜不许回头改剧情。</li>
+            <li><b>中间层可来回迭代</b>：人设、美术、剧本互相校对，但不推翻集数与爽点骨架。</li>
+            <li><b>质量门是代码。</b>「主角不要太多」写成 1–5 的校验；「钩子在前 3 拍」写成断言。模型自觉的 checklist 等于没有。</li>
+            <li><b>资产预填，禁止手抄。</b>人物表从大纲长出来，美术吃同一份 JSON，避免第二份真相。</li>
+          </ol>
+          <p>shuohao-skills 把这五步落成可跑的 skill（Claude Code / Codex 都能跑，零 npm 依赖）：</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>层</th><th>负责什么</th><th>门</th><th>允许的决定</th></tr></thead>
+              <tbody>
+                <tr><td>outline</td><td>改编说明、人物分档、爽点、分集、资产清单</td><td>14</td><td>结构。可体检已有大纲。</td></tr>
+                <tr><td>characters</td><td>画像、形象 / 音色提示词、设定图</td><td>—</td><td>人怎么被看见、被听见</td></tr>
+                <tr><td>art</td><td>场景 + 叙事道具、一致性锚点、状态变体</td><td>11</td><td>世界长什么样。这步不扎实，后面每张都像不同的剧</td></tr>
+                <tr><td>script</td><td>场次 + 节拍；时长按语速算；台词对接 TTS</td><td>10</td><td>戏。不管镜头</td></tr>
+                <tr><td>storyboard</td><td>2–5 秒分镜 + 图 + 视频模型提示词</td><td>17</td><td>只输出，不做新剧情决定</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>仓库：<a href="https://github.com/eternityspring/shuohao-skills">eternityspring/shuohao-skills</a>。这是短剧领域把原则实现得很彻底的一种方案；换游戏关卡、系列广告，骨架可以原样搬：结构 → 角色/世界 → 剧本 → 镜头。</p>
+        </article>
+
+        <article class="unit" data-sys="agent" data-keys="微信群 真实需求 demo 产品">
+          <div class="tags"><span class="tag p">产品</span></div>
+          <h3>能秀的能力和每天需要的能力不是同一张清单</h3>
+          <p>收藏里最不像 demo 的一句：智能体眼下最核心的需求可能是总结微信群。接口不开、合规打压、有人做了也不敢开源。它提醒的是体系 III 的验收：生产系统要先问「有没有每日真实输入」，再问「能不能过夜建曼哈顿」。</p>
+        </article>
+
+        <article class="unit" id="agent-fix" data-sys="agent" data-keys="纠错 max 进度条 质量门 checklist">
+          <div class="tags"><span class="tag x">纠错</span></div>
+          <h3>额度技巧不是玄学</h3>
+          <div class="correct">
+            <p><strong>「两条进度条对齐就赢了」</strong> → 对齐是资源卫生，不提高智力。指挥模型选错任务，对齐也只是整齐地做错。</p>
+            <p><strong>「Max 一定更强，生产必须开」</strong> → 在这套额度结构里，Max 优先消耗的是稀缺的指挥窗口。大多数拆任务用 High/Medium 更合理。有人第一次就把 5 小时窗口打爆，是用法问题不是模型问题。</p>
+            <p><strong>「把 checklist 贴进提示词就算质量门」</strong> → 短剧 skill 的主张相反：门必须能 <code>validate</code> 失败。不能失败的门，只是文案。</p>
+          </div>
+        </article>
+      </section>
+
+      <!-- ===================== ACCESS ===================== -->
+      <section class="chapter" id="access" data-sys="access">
+        <h2>IV · 界面生成与接入</h2>
+        <p class="ch-lead">同一套权重，对话网页、Studio、编码 Agent、礼品卡钱包，接到的根本不是同一层能力。</p>
+        <div class="axiom">
+          <div class="k">核心命题</div>
+          <p>界面生成停在可运行原型；再往前是工程。用模型之前，先问你进的是哪一个入口——入口决定上下文、工具、配额和能不能 computer use。</p>
+        </div>
+
+        <article class="unit" id="access-ui" data-sys="access" data-keys="product design 前端 原型 landing gemini ai studio 满血 3.8">
+          <div class="tags"><span class="tag p">原理</span></div>
+          <h3>先理解产品，再出页；页不是系统</h3>
+          <p>设计向插件（Codex 上的 Product Design 是一种）正确的顺序是：定位、用户、场景 → 视觉方向、信息架构、交互 → 可运行页面。它解决的是「从需求到第一版界面」的欠定问题，和空间生成里「先有风格靶」是同一类：先给方向，再填像素。</p>
+          <p>适用：个人站、Landing、说明页、后台壳、MVP 演示。不适用：权限、数据一致性、设计系统演进、性能、多人协作。评论里「前端要失业」是把原型层当成了工程层；反过来，「工程师用了只是如虎添翼」才是这一层的正确推论。</p>
+          <p>Gemini 同理：消费级对话网页是产品，Google AI Studio 才是完整的模型选择、参数和构建界面。要「指哪打哪」做前端原型，应走 Studio；当时 3.8 Flash 也是在 Studio 里先测。社区说的「满血」应读成「没被对话产品裁过的那一层」，不是神秘开关。</p>
+        </article>
+
+        <article class="unit" id="access-door" data-sys="access" data-keys="礼品卡 redeem tailscale grok bot cloudflare startup 1万美元 ssh">
+          <div class="tags"><span class="tag m">方案</span></div>
+          <h3>三种入口，解决三种「用不了」</h3>
+          <div class="options">
+            <div class="opt">
+              <div class="who">付账</div>
+              <h4>官方礼品卡进钱包</h4>
+              <p>OpenAI 礼品卡：美国购买和兑换，美元，$15–$250，无有效期。<a href="https://chatgpt.com/redeem">chatgpt.com/redeem</a> 充进 Wallet，可付 Go / Plus / Pro / Business 和部分 credits。它解决支付通道，不解决风控——封号后比苹果 / 谷歌订阅更难退。</p>
+            </div>
+            <div class="opt">
+              <div class="who">机器</div>
+              <h4>Grok Bot 那台电脑就是节点</h4>
+              <p>Bot 自带约 8 核 / 16G / 128G 的 Debian，默认只能聊天代劳。Tailscale SSH 把它拉进你的 tailnet：<code>ssh box@cursor-box.&lt;尾网&gt;.ts.net</code>。PID 1 不是 systemd，开机钩子要单独挂。不要点 Update Grok Bot's Computer 换镜像，会清掉 Tailscale 和登录态。</p>
+            </div>
+            <div class="opt">
+              <div class="who">云</div>
+              <h4>一人公司的基础设施额度</h4>
+              <p>Cloudflare for Startups 的自筹档（公司 &lt;10 年、融资 &lt;$1M、域名邮箱、能看懂的官网、一个公开账号）对应约 $10k / 年。申请本身不收费，但账户要绑付款方式。注意子限额：该档 Workers AI 大约只能抵 $2,500；域名、AI Gateway、China Network 往往不在额度里。以官网当时条款为准。</p>
+            </div>
+            <div class="opt">
+              <div class="who">视频试水</div>
+              <h4>Grok 上的生成 bot</h4>
+              <p>不知道 ChatGPT 视频管线怎么搭时，Grok bot 可以直接吃图或一句话出情绪短片。这是接入层的一条捷径，不是体系 II 的完整生产。</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="unit" data-sys="access" data-keys="纠错 满血 礼品卡 封号 前端失业 update 镜像">
+          <div class="tags"><span class="tag x">纠错</span></div>
+          <h3>入口上的常见读错</h3>
+          <div class="correct">
+            <p><strong>「网页版 Gemini 故意残血」</strong> → 更稳的表述：那是对话产品，路由、工具、限流和 Studio 不同。要完整控件就去 Studio，不必阴谋论。</p>
+            <p><strong>「礼品卡是最安全的订阅方式」</strong> → 对支付摩擦是。对账号安全不是。封号原因更多是环境 / 接口滥用，和是不是礼品卡关系不大，且更难找发卡渠道退款。</p>
+            <p><strong>「有了 Grok Bot 等于有一台永远的美国 VPS」</strong> → 换镜像即重置。当开发机可以，当不可丢失的服务器不行。</p>
+          </div>
+        </article>
+      </section>
+
+      <footer>
+        原料：<code>bookmarks-last5days-full.json</code>，窗口 2026-09-01T00:00:00Z 至 2026-09-05。帖子里的耗时、美元、人民币都是个人套餐或渠道观察，只用来建立数量级。病毒 demo 标上界，质量门和可编辑性标能不能用于生产。
+      </footer>
+    </main>
+  </div>
+  <script>
+    const q = document.getElementById("q");
+    const empty = document.getElementById("empty");
+    const hit = document.getElementById("hit");
+    const chips = document.getElementById("chips");
+    const units = [...document.querySelectorAll(".unit")];
+    const chapters = [...document.querySelectorAll(".chapter")];
+    let sys = "all";
+
+    function norm(s) { return (s || "").toLowerCase(); }
+    function apply() {
+      const query = norm(q.value.trim());
+      let shown = 0;
+      units.forEach((el) => {
+        const s = el.dataset.sys || el.closest(".chapter")?.dataset.sys || "all";
+        const hay = norm(el.innerText + " " + (el.dataset.keys || ""));
+        const okSys = sys === "all" || s === sys || s === "all";
+        const okQ = !query || hay.includes(query);
+        const on = okSys && okQ;
+        el.classList.toggle("hidden", !on);
+        if (on) shown++;
+      });
+      chapters.forEach((ch) => {
+        const id = ch.id;
+        if (id === "how" && sys !== "all" && !query) {
+          ch.classList.toggle("hidden", false);
+          return;
+        }
+        const any = [...ch.querySelectorAll(".unit")].some((u) => !u.classList.contains("hidden"));
+        const selfMatch = sys === "all" || ch.dataset.sys === sys;
+        ch.classList.toggle("hidden", query ? !any : !selfMatch && id !== "how");
+        if (!query && !selfMatch && id !== "how") {
+          ch.querySelectorAll(".unit").forEach((u) => u.classList.add("hidden"));
+        }
+      });
+      empty.style.display = shown ? "none" : "block";
+      hit.textContent = shown ? shown + " 节" : "";
+    }
+
+    function setSys(next) {
+      sys = next;
+      chips.querySelectorAll(".chip").forEach((b) => b.setAttribute("aria-pressed", b.dataset.sys === sys ? "true" : "false"));
+      apply();
+    }
+    function sysFromHash(hash) {
+      if (hash.startsWith("#space")) return "space";
+      if (hash.startsWith("#video")) return "video";
+      if (hash.startsWith("#agent")) return "agent";
+      if (hash.startsWith("#access")) return "access";
+      return "all";
+    }
+    q.addEventListener("input", apply);
+    chips.addEventListener("click", (e) => {
+      const btn = e.target.closest(".chip");
+      if (!btn) return;
+      setSys(btn.dataset.sys);
+    });
+    document.querySelectorAll("nav.toc a, .map a").forEach((a) => {
+      a.addEventListener("click", () => {
+        q.value = "";
+        setSys(sysFromHash(a.getAttribute("href") || ""));
+      });
+    });
+    apply();
+
+    document.querySelectorAll("button.copy").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const el = document.getElementById(btn.dataset.copy);
+        const text = el ? el.innerText : "";
+        try { await navigator.clipboard.writeText(text); }
+        catch {
+          const ta = document.createElement("textarea");
+          ta.value = text; document.body.appendChild(ta);
+          ta.select(); document.execCommand("copy"); ta.remove();
+        }
+        btn.classList.add("ok");
+        btn.textContent = "已复制";
+        setTimeout(() => { btn.classList.remove("ok"); btn.textContent = "复制"; }, 1400);
+      });
+    });
+
+    const tocLinks = [...document.querySelectorAll("nav.toc a")];
+    const secs = tocLinks.map((a) => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+    const io = new IntersectionObserver((entries) => {
+      const vis = entries.filter((en) => en.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!vis) return;
+      tocLinks.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + vis.target.id));
+    }, { rootMargin: "-18% 0px -70% 0px" });
+    secs.forEach((s) => io.observe(s));
+  </script>
+</body>
+</html>
