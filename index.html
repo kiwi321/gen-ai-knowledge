@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>生成：可编辑的，才算真的</title>
-  <meta name="description" content="从近 5 日 X 收藏压出来的生成知识：空间、视频、Agent、界面。只留能站住的机制和做法。" />
+  <title>近 5 日收藏 · 生成 AI 学习笔记</title>
+  <meta name="description" content="把 2026-09-01 到 09-05 的 X 收藏写成能学的笔记：3D、视频、Agent、做网页。" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231b1916'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='16' fill='%23c23b22' font-family='Georgia'%3EX%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,7 +18,6 @@
       --rule: #d8cfc0;
       --accent: #c23b22;
       --teal: #1f5c4e;
-      --gold: #8a5a12;
       --prompt: #161412;
       --prompt-fg: #e8dfd0;
     }
@@ -29,54 +28,65 @@
       background: var(--paper);
       color: var(--ink);
       font-family: "IBM Plex Sans", "PingFang SC", "Noto Sans SC", sans-serif;
-      font-size: 16.5px;
-      line-height: 1.65;
+      font-size: 17px;
+      line-height: 1.75;
     }
     a { color: var(--teal); text-underline-offset: 3px; }
-    .wrap { display: grid; grid-template-columns: 180px minmax(0, 1fr); max-width: 980px; margin: 0 auto; }
+    .wrap {
+      display: grid;
+      grid-template-columns: 168px minmax(0, 1fr);
+      max-width: 920px;
+      margin: 0 auto;
+    }
     nav {
       position: sticky; top: 0; height: 100vh;
-      padding: 28px 16px; border-right: 1px solid var(--rule);
+      padding: 28px 14px 28px 18px;
+      border-right: 1px solid var(--rule);
     }
-    nav .mark { font-family: Fraunces, Georgia, serif; font-weight: 560; }
+    nav .mark { font-family: Fraunces, Georgia, serif; font-weight: 560; font-size: 15px; }
     nav .mark span { color: var(--accent); }
-    nav p { color: var(--muted); font-size: 12px; margin: 8px 0 18px; line-height: 1.4; }
-    nav a { display: block; color: var(--muted); text-decoration: none; font-size: 13.5px; padding: 6px 0; }
+    nav .tiny { color: var(--muted); font-size: 12px; margin: 8px 0 16px; line-height: 1.4; }
+    nav a {
+      display: block; color: var(--muted); text-decoration: none;
+      font-size: 13.5px; padding: 6px 0;
+    }
     nav a:hover, nav a.active { color: var(--ink); }
-    main { padding: 36px 36px 80px; min-width: 0; }
+    main { padding: 36px 40px 88px; min-width: 0; }
     h1 {
       font-family: Fraunces, Georgia, serif;
-      font-size: clamp(28px, 5vw, 42px);
-      line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 10px;
+      font-size: clamp(26px, 4.5vw, 38px);
+      line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 12px;
     }
-    h1 em { font-style: italic; color: var(--accent); font-weight: 500; }
-    .lede { max-width: 62ch; color: #3a3530; margin: 0 0 28px; }
+    .lede { max-width: 40em; margin: 0 0 28px; color: #3a3530; }
     h2 {
       font-family: Fraunces, Georgia, serif;
-      font-size: 26px; margin: 40px 0 8px; scroll-margin-top: 20px;
+      font-size: 24px; margin: 44px 0 10px; scroll-margin-top: 16px;
     }
-    .axiom {
-      background: var(--ink); color: #f6efe4;
-      border-radius: 12px; padding: 14px 16px; margin: 0 0 14px; font-size: 16px;
-    }
+    h3 { font-size: 17px; margin: 22px 0 8px; }
+    p { margin: 0 0 12px; max-width: 40em; }
     .card {
-      background: var(--card); border: 1px solid var(--rule);
-      border-radius: 12px; padding: 16px; margin: 0 0 12px;
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin: 0 0 14px;
+      max-width: 42em;
     }
-    .card h3 { font-size: 15.5px; margin: 0 0 8px; }
-    ul, ol { margin: 0; padding-left: 1.2em; }
-    li { margin: 4px 0; }
-    table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
-    th, td { text-align: left; vertical-align: top; padding: 7px 8px 7px 0; border-bottom: 1px solid var(--rule); }
-    th { color: var(--muted); font-weight: 600; font-size: 12.5px; }
-    .note { color: var(--muted); font-size: 13.5px; margin: 8px 0 0; }
+    ol, ul { margin: 0 0 12px; padding-left: 1.25em; max-width: 40em; }
+    li { margin: 6px 0; }
+    .try {
+      border-left: 3px solid var(--accent);
+      padding: 2px 0 2px 12px;
+      margin: 12px 0;
+      max-width: 40em;
+    }
     .head {
       display: flex; justify-content: space-between; align-items: center;
-      gap: 8px; margin-top: 10px; font-size: 12px; color: var(--muted);
+      gap: 8px; margin: 12px 0 0; font-size: 13px; color: var(--muted);
     }
     pre {
       background: var(--prompt); color: var(--prompt-fg);
-      border-radius: 10px; padding: 12px; overflow: auto;
+      border-radius: 10px; padding: 12px 14px; overflow: auto;
       font-family: "IBM Plex Mono", ui-monospace, monospace;
       font-size: 12.5px; line-height: 1.5; white-space: pre-wrap; margin: 6px 0 0;
     }
@@ -85,119 +95,151 @@
       border-radius: 8px; padding: 3px 8px; font: inherit; font-size: 12px; cursor: pointer;
     }
     button.copy.ok { border-color: var(--teal); }
-    footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 13px; }
+    footer {
+      margin-top: 40px; padding-top: 14px;
+      border-top: 1px solid var(--rule);
+      color: var(--muted); font-size: 13px; max-width: 40em;
+    }
     @media (max-width: 800px) {
       .wrap { grid-template-columns: 1fr; }
-      nav { position: relative; height: auto; border-right: 0; border-bottom: 1px solid var(--rule); padding: 14px 16px; }
+      nav {
+        position: relative; height: auto; border-right: 0;
+        border-bottom: 1px solid var(--rule); padding: 14px 16px;
+      }
       nav .links { display: flex; flex-wrap: wrap; gap: 0 14px; }
-      main { padding: 22px 16px 56px; }
+      main { padding: 22px 16px 64px; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <nav>
-      <div class="mark">生成<span> · 压缩</span></div>
-      <p>去掉刷屏 demo。<br>只留能复用的机制。</p>
+      <div class="mark">学习笔记</div>
+      <p class="tiny">2026-09-01 到 09-05<br>收藏里能学会的部分</p>
       <div class="links">
-        <a href="#space">空间</a>
-        <a href="#video">视频</a>
-        <a href="#agent">Agent</a>
-        <a href="#ui">界面</a>
+        <a href="#intro">怎么用这页</a>
+        <a href="#space">3D 和游戏</a>
+        <a href="#video">做视频</a>
+        <a href="#agent">带 Agent 干活</a>
+        <a href="#ui">做网页</a>
       </div>
     </nav>
     <main>
-      <h1>可编辑的，<em>才算真的。</em></h1>
-      <p class="lede">近五天收藏里，模型和生成的帖子大多在展示上界：过夜建城、一句话出可玩页、手持风短片。能留下来用的，只有四条机制。数字、排名、工期都不可信，不写。</p>
+      <h1>这些收藏，到底在教什么</h1>
+      <p class="lede">你收藏它们，是因为里面可能有用。这页按「能学会什么」来写，不按帖子一条条复述。专有名词第一次出现会先解释。帖子里夸张的部分会说明白：哪些是可以练的方法，哪些只是演示视频。</p>
 
-      <h2 id="space">1 · 空间</h2>
-      <div class="axiom">验收是场景图还在不在：mesh、材质、关卡、工程文件。视频可以骗过一次浏览，给不了第二次修改。</div>
+      <h2 id="intro">怎么用这页</h2>
+      <p>这五天刷屏的名字主要是 <b>GPT-6 Astra</b>（OpenAI 的新模型，特别擅长 3D 和自己操作电脑软件）、<b>MiniMax H3</b>（便宜的视频生成）、<b>Seedance 2.5</b>（画质更高的视频生成）、以及编码 Agent 里比较贵的 <b>Fable</b>。</p>
+      <p>它们看起来像四件无关的热闹，其实可以收成四件事来学：</p>
+      <ol>
+        <li>让模型交出来的是<b>还能继续改的文件</b>，不是一张图。</li>
+        <li>做视频之前先问：你要的是「房间关系正确」，还是「看起来像随手拍」。</li>
+        <li>贵模型负责想和验收，具体干活交给更便宜的模型。</li>
+        <li>一句话做出来的网页是原型，不是上线产品。</li>
+      </ol>
+      <p>下面每一节都是：这件事是什么 → 为什么值得学 → 你可以怎么做。文末的黑底文字是可以复制去改的模板，不是必须原样使用的咒语。</p>
+
+      <h2 id="space">1. 3D 和游戏：交工程文件，不是交一张漂亮图</h2>
+      <p>以前让模型「做个 3D」，你拿到的通常是一张渲染图，或者一段转圈视频。好看，但下一步没法改：不能换一把椅子、不能加碰撞、不能继续当游戏用。</p>
+      <p>这周 Astra 相关收藏的真正变化是：模型开始<b>自己打开软件干活</b>。常见软件包括 Blender（做 3D 模型的工具）、Unreal Engine（游戏引擎）、以及浏览器里的 three.js（用网页显示 3D）。它交出来的是工程：模型文件、场景、能在浏览器里玩的小游戏。</p>
+      <p>这件事值得学，因为后面你还能改。图改不了；工程可以继续往下做。</p>
+
+      <h3>先决定你要哪种东西</h3>
       <div class="card">
-        <h3>先选载体</h3>
-        <table>
-          <thead><tr><th>要什么</th><th>用什么</th><th>边界</th></tr></thead>
-          <tbody>
-            <tr><td>能转发的小可玩</td><td>浏览器 + three.js</td><td>风格服从引擎：圆角 / 像素 / voxel。不要写实。</td></tr>
-            <tr><td>还能改的资产</td><td>Blender（MCP 或 computer use）</td><td>价值在文件，不在渲染图。</td></tr>
-            <tr><td>开世界</td><td>引擎 + 按区块过夜循环</td><td>工期按天。一条 prompt 只够局部。</td></tr>
-            <tr><td>只看一次</td><td>视频模型</td><td>没有场景图，改一扇门就要整段重抽。</td></tr>
-          </tbody>
-        </table>
-        <p class="note">模型对比只在同一载体上有意义。单次对打、病毒视频，都不够当排行榜。</p>
-      </div>
-      <div class="card">
-        <h3>画质来自视觉闭环，不是更长的提示词</h3>
-        <p>文本对美术方向是欠定的。先出目标概念图，再用游戏内截图去逼近，并钉死帧率。computer use 能进 Blender / Unreal / KiCad / Canva，证明的是「屏幕就是没做 API 的接口」，不是专业流程被替换。</p>
-        <div class="head"><span>闭环（一种做法）</span><button type="button" class="copy" data-copy="p-loop">复制</button></div>
-        <pre id="p-loop">Connect Codex to Blender MCP.
-1) Image-gen concept frames of the target art style.
-2) Model assets in Blender. Textures from image gen. No external packs.
-3) Iterate until in-game screenshots match those frames, at 60fps.
-4) High reasoning. Stop when the scene is editable, not when a trailer looks good.</pre>
-        <div class="head"><span>网页 3D 骨架</span><button type="button" class="copy" data-copy="p-web3d">复制</button></div>
-        <pre id="p-web3d">新项目，网页 3D，three.js，Vite，可本地跑。
-角色 / 空间 / 可扩展的道具写成独立模型。
-风格主动规避写实短板（圆角、像素、二次元）。
-相机可旋转缩放。验收：能继续加东西的工程，不是一张图。</pre>
+        <p>想发一个别人点开就能玩的小东西：用网页 + three.js。这种技术不擅长写实，提示词里主动说「像动森 / 塞尔达 / 像素风」，等于把短板写成风格。</p>
+        <p>想要以后还能改的 3D 资产：用 Blender。让模型通过 MCP（一种让 Agent 调用外部工具的接口）或者直接操作软件界面（叫 computer use：把屏幕当按钮来点）去建模。你要的是 mesh（三维网格，真正的 3D 形状），不是一张图。</p>
+        <p>想做很大的世界：不要指望一条提示词。把世界切成一条街、一个房间，让 Agent 过夜一轮轮检查、修补。收藏里那些「连跑几天」的演示，说明的是工期按天算，不是「一句话出 3A 游戏」。</p>
+        <p>如果只是看一眼、不打算改：用视频模型更省事。但视频里没有场景结构，你改不了一扇门。</p>
       </div>
 
-      <h2 id="video">2 · 视频</h2>
-      <div class="axiom">视频模型补像素，不持有空间。要房间关系，先建几何；要「像随手拍」，锁摄影机语言。两者不要共用工作流。</div>
-      <div class="card">
-        <h3>两条路径</h3>
-        <table>
-          <thead><tr><th></th><th>空间连续</th><th>日常手持</th></tr></thead>
-          <tbody>
-            <tr><td>真正约束</td><td>统一三维空间 + 同一套视角</td><td>身份不变 + 手持缺陷 + 按秒事件</td></tr>
-            <tr><td>模型干什么</td><td>只填像素，不发明建筑</td><td>便宜模型通常够；更贵的买纹理，不买「更像监控」</td></tr>
-            <tr><td>改一处</td><td>改场景图，再导出，再生成</td><td>改某一秒，整段重抽</td></tr>
-          </tbody>
-        </table>
-        <p class="note">渠道价、积分换算都是个人账单，只说明数量级。H3 适合手持风，不自动胜任一镜多房间。短剧里，视频模型只出现在分镜层——前面的结构、人、世界没锁死，每张都会像不同的剧。</p>
-        <div class="head"><span>手持风：五锁</span><button type="button" class="copy" data-copy="p-h3">复制</button></div>
-        <pre id="p-h3">LOCK identity: face, hair, outfit, accessories — unchanged.
-LOCK setting: ordinary streets, no brands, landmarks, ads, crowds.
-LOCK camera: old handheld. Shake, autofocus hunting, exposure drift, noise. No gimbal, drone, slow-mo.
-LOCK time: 5-second beats, one concrete action each.
-LOCK audio: wind, footsteps, ambience. No music, narration, subtitles.
-Feel: accidentally captured by a friend.</pre>
-      </div>
+      <h3>想好看，不要把提示词写得更长，要给它一张「标准答案图」</h3>
+      <p>只写「赛博朋克、很美、很真实」，模型不知道停在哪算对。社区里比较有效的做法是：</p>
+      <ol>
+        <li>先用图像生成，做出你想要的画面（概念图）。</li>
+        <li>让模型在 Blender 里搭场景。</li>
+        <li>截游戏里的画面，跟概念图对比，不像就继续改。</li>
+        <li>同时要求能跑到 60 帧，避免它用糊画面冒充画质。</li>
+      </ol>
+      <p>这叫视觉闭环：有一张可以对比的图，优化才知道往哪走。有人 45 分钟出了很炫的画面，作者自己后来说那是画面演示，玩法还没做完。所以你学的是这套对比方法，不是「45 分钟做一个游戏」。</p>
+      <div class="try"><b>可以练：</b>选一个很小的场景（一张桌子、一个房间）。先出 3 张概念图，再让 Astra / Codex 接到 Blender，循环改到截图接近概念图为止。完成的标志是：你能在 Blender 里选中物体并挪动它。</div>
+      <div class="head"><span>Blender 闭环，可改了再用</span><button type="button" class="copy" data-copy="p-loop">复制</button></div>
+      <pre id="p-loop">把 Codex 接到 Blender MCP。
+1）先用图像生成，做出目标画风的概念图。
+2）在 Blender 里建模。贴图也用图像生成，不要下载现成素材包。
+3）截游戏内画面，跟概念图对比，一直改到接近为止，并跑在 60fps。
+4）推理强度用 High。
+完成标准：我能打开工程继续改，而不是只拿到一段预告片。</pre>
+      <div class="head"><span>网页小 3D，可改了再用</span><button type="button" class="copy" data-copy="p-web3d">复制</button></div>
+      <pre id="p-web3d">新项目：网页 3D，three.js，用 Vite，要能在本地打开。
+角色：____（外观、动作要能互相区分）
+空间：____（多大、视觉中心在哪；哪些道具以后要单独加）
+风格：不要写实。用圆角、像素或二次元（动森 / 塞尔达那种）。
+相机能旋转、缩放。
+完成标准：这是一份能继续加道具和动作的工程，不是一张图。</pre>
 
-      <h2 id="agent">3 · Agent</h2>
-      <div class="axiom">智力花在澄清、拆解、验收。搬砖交给更便宜的工人。写给模型看的 checklist 等于没有——门必须能被脚本判失败。</div>
-      <div class="card">
-        <h3>指挥和工人分开</h3>
-        <ul>
-          <li>指挥：判断和抽查。High / Medium。默认不上 Max——Max 买的是更长的死磕，却按最高倍率烧稀缺窗口。</li>
-          <li>工人：读、写、测、批量改。</li>
-          <li>卫生：换任务就清上下文；长任务中途压缩；哪条额度条超前就反向调。对齐是资源卫生，不提高智力。</li>
-        </ul>
-        <div class="head"><span>指挥附言</span><button type="button" class="copy" data-copy="p-fable">复制</button></div>
-        <pre id="p-fable">你的任务是分析、编排和验证。具体执行交给 subagent。
-只做需求澄清、方案拆解、任务分发、结果验收。
+      <h2 id="video">2. 做视频：先问你要骗过什么</h2>
+      <p>视频模型和 3D 工具解决的不是同一个问题。视频模型擅长生成<b>一段连续的画面</b>。它并不真正记得「这栋房子有几间房、相机刚才从哪扇门出来」。所以下面两件事必须分开做。</p>
+
+      <h3>你要空间连续：镜头穿过好几个房间，东西还在原处</h3>
+      <p>如果直接对视频模型说「拍一条穿过七个房间的长镜头」，它很容易一边走一边编房间，后面的门对不上前面的墙。</p>
+      <p>比较靠谱的顺序是：先在 3D 里搭好这一集用到的空间，摆好人和相机，把整条路线走一遍；再从几个关键位置导出<b>同一套视角</b>的截图；最后才把这些截图和分镜交给 Seedance 这类视频模型去填成片子。3D 负责「房间关系别错」，视频模型只负责把画面变得好看。</p>
+      <p>以后要改镜头，就回到 3D 里改，再导出、再生成。不要在视频模型里让它「再想一次房间」。</p>
+      <div class="try"><b>可以练：</b>只做两个相连的房间。先用 Astra 在 Blender 里搭好，导出 4 张同一相机体系的截图，再交给视频模型生成 6 秒。看它会不会把门走丢。</div>
+
+      <h3>你要日常感：看起来像朋友随手拍的</h3>
+      <p>这种片子要骗过的不是空间关系，而是「这是不是广告」。更贵的视频模型往往更像电影预告，不一定更像监控或手机。</p>
+      <p>H3 这类便宜模型够用，关键是把「不像广告」写成约束，而不是只写「超真实」：</p>
+      <ul>
+        <li>人的脸、发型、衣服从头到尾不要变。</li>
+        <li>场景里不要品牌、地标、一堆路人。</li>
+        <li>相机写成旧手机手持：晃、对焦来回找、曝光乱跳。禁止云台、无人机、慢动作。</li>
+        <li>按每 5 秒写一件具体的事，不要写情绪形容词。</li>
+        <li>声音只用环境声和笑声，不要配乐、旁白、字幕。</li>
+      </ul>
+      <p>有人说 H3「不输」更贵的模型，那是在这种日常片上。要一镜穿过复杂空间，它不是自动胜任的。网上的「0.1 元/秒」是某个渠道的价，换地方会变，别当公式记。</p>
+      <p>另外：已经拍好的素材，可以用 Codex 加剪辑工具按你的口述去剪。那是在剪时间线，不是替你拍摄。</p>
+      <div class="head"><span>日常手持，可改了再用</span><button type="button" class="copy" data-copy="p-h3">复制</button></div>
+      <pre id="p-h3">做一段 30 秒、1080p、像朋友随手拍的视频。同一个人，做一件临时起意的小事。
+
+人：脸、头发、衣服、包、饰品全程不变。
+场景：普通街区，不要品牌、地标、广告、摆拍人群。
+相机：旧手机手持。构图不稳、会晃、会对焦来回找、曝光会跳、有噪点和压缩。不要云台、无人机、慢动作、广告片质感。
+时间：每 5 秒一件具体动作，写清楚在干什么。
+声音：风、脚步、环境声、真的笑。不要配乐、旁白、字幕、水印。
+
+最后的感觉：碰巧被朋友拍到，普通、不完美、是真的。</pre>
+
+      <h2 id="agent">3. 带 Agent 干活：最贵的模型不要去搬砖</h2>
+      <p>在 Cursor / Claude Code / Codex 这类编码 Agent 里，往往有一档更贵、更聪明的模型（这周收藏里常出现的是 Fable），额度大概只占总额度的一半。另外还有更便宜的模型真正去改文件、跑测试。</p>
+      <p>如果全程用最贵的那档去读几千行代码、做小修改，它会很快用完。后半周你就只剩较笨的模型，或者总额度先被便宜模型烧光，最强的那档反而浪费了。</p>
+      <p>可以记住一个分工：</p>
+      <ul>
+        <li><b>指挥：</b>搞清楚要做什么、怎么拆、做完了对不对。强度用 High 或 Medium。不要动不动开 Max。Max 的意思是让它死磕更久，不是让它更会做架构，却按最高倍率烧指挥额度。</li>
+        <li><b>工人：</b>读代码、写代码、跑测试、批量改文件。交给更便宜的子 Agent。</li>
+        <li><b>卫生：</b>换一件事就清上下文；一件很长的事做到一半，压缩一下对话。看一眼两类额度是不是一起往下掉。对齐只说明你没乱烧钱，不说明你做对了。</li>
+      </ul>
+      <div class="try"><b>可以练：</b>下一件超过半小时的开发任务，主对话只写「拆任务和验收」，所有改文件都明确要求派给 subagent。做完看两类额度是不是大致一起下降。</div>
+      <div class="head"><span>贴在任务末尾</span><button type="button" class="copy" data-copy="p-fable">复制</button></div>
+      <pre id="p-fable">你主要负责分析、编排和验收。具体执行尽量交给 subagent。
+你自己只做：把需求问清楚、拆方案、分任务、检查结果。
 读大量代码、写代码、跑测试、批量修改，一律派给 subagent。不要选 Max 及以上。</pre>
-      </div>
-      <div class="card">
-        <h3>多步生成必须收敛</h3>
-        <p>后面的步骤爱做新决定，人物和房间就会每张都不一样。</p>
-        <ol>
-          <li>先锁结构。大纲可以否定后面的一切；分镜不许回头改剧情。</li>
-          <li>人设、美术、剧本可来回校对，但不推翻骨架。</li>
-          <li>质量门是代码，能 <code>validate</code> 失败。</li>
-          <li>资产从上一层预填，禁止手抄出第二份真相。</li>
-        </ol>
-        <p class="note">短剧 skill 是这四条写得最清楚的一种实现（结构 → 角色/世界 → 剧本 → 镜头），不是唯一产品形态。<a href="https://github.com/eternityspring/shuohao-skills">shuohao-skills</a>。能秀的过夜建城，和每天真有输入的生产，不是同一张清单。</p>
-      </div>
 
-      <h2 id="ui">4 · 界面</h2>
-      <div class="axiom">同一套权重，对话网页、Studio、编码 Agent 接到的不是同一层。界面生成停在可运行原型；再往前是工程。</div>
-      <div class="card">
-        <h3>先给方向，再填像素</h3>
-        <p>顺序是：定位、用户、场景 → 视觉和信息架构 → 可运行页。适用 Landing、说明页、MVP 壳。不适用权限、数据一致性、设计系统、性能。把这一层说成「前端失业」，是把原型当成了工程。</p>
-        <p class="note">Gemini 网页版是对话产品；要完整模型选择和构建控件，去 Google AI Studio。「满血」只是「没被产品层裁过」，不是开关。</p>
-      </div>
+      <h3>做连续内容时，后面的步骤不许自己改剧情</h3>
+      <p>短剧、系列视频、大场景都有同一个坑：每一步都想「再创意一下」，于是人物脸、房间、情节每张都不一样。</p>
+      <p>比较稳的顺序是：先定结构（有几集、每集发生什么）；再定人和世界长什么样；然后写剧本；最后才出分镜和视频。分镜这一步只负责「怎么拍」，不许回头改剧情。</p>
+      <p>「主角不要太多」「开场 3 秒里要有钩子」这类要求，如果只写在提示词里，模型经常假装遵守。写成检查脚本，不合格就失败——这才叫质量门。收藏里的 <a href="https://github.com/eternityspring/shuohao-skills">shuohao-skills</a> 就是把这件事做成了可跑的流程，短剧只是一个例子。做游戏关卡或系列广告，也可以用同一骨架：结构 → 角色和世界 → 剧本 → 镜头。</p>
+      <p>还有一句很土、但比过夜建城更接近真实工作：很多人每天真正需要 Agent 做的，是整理信息（有人说是总结微信群）。接口和合规是另一回事；学习上只要分清——会演示的能力，和每天用得上的能力，不是同一张清单。</p>
 
-      <footer>原料是 2026-09-01 至 09-05 的 X 收藏。刷屏 demo 标上界；可编辑性和能失败的质量门，标能不能用于生产。</footer>
+      <h2 id="ui">4. 做网页：先分清「能点开」和「能上线」</h2>
+      <p>Codex 上有人在用 Product Design 这类插件：你说产品给谁用、在什么场景，它先定视觉方向和页面结构，再生成一个能打开的页面。这解决的是「从想法到第一版界面」。</p>
+      <p>它适合个人站、介绍页、演示用的后台壳。不适合当成已经做完的产品：登录权限、数据对不对、以后怎么改设计系统、快不快，都还没开始。</p>
+      <p>所以「前端要失业」这种话，学的时候直接丢掉。你要学的是：用它很快得到可以讨论的原型；真正做产品时，你（或工程师）还要把数据、权限、性能补上。</p>
+      <p>用 Gemini 也是同一类问题。平时打开的 Gemini 网页是聊天产品，模型和功能会被产品层裁过。你要试完整能力和「指哪打哪」改界面，去 <b>Google AI Studio</b>。别人说的「满血」，意思就是这个，不是有一个隐藏开关。</p>
+      <div class="try"><b>可以练：</b>用一句话描述你自己的一个小工具（谁用、解决什么、打开后第一眼看到什么），在 Codex 或 AI Studio 里做出能打开的第一页。然后自己列一张清单：登录、数据存在哪、哪些状态会错。清单上的东西，就是原型还没覆盖的部分。</div>
+
+      <footer>
+        根据 2026-09-01 至 09-05 的 X 收藏整理。演示视频说明「有人做到过」；你要学的是方法，以及完成时看什么（工程还能不能改、检查会不会失败）。
+      </footer>
     </main>
   </div>
   <script>
@@ -221,7 +263,7 @@ Feel: accidentally captured by a friend.</pre>
       const vis = entries.filter((e) => e.isIntersecting)[0];
       if (!vis) return;
       links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + vis.target.id));
-    }, { rootMargin: "-20% 0px -70% 0px" });
+    }, { rootMargin: "-18% 0px -72% 0px" });
     secs.forEach((s) => io.observe(s));
   </script>
 </body>
